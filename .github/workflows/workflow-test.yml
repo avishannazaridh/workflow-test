@@ -1,0 +1,56 @@
+
+name: workflow-test
+
+on:
+  push
+
+jobs:
+
+  JobOne:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: print the date
+        env:
+          date: '`r format(Sys.time(), "%d %B, %Y")`'
+        run: echo $date
+        
+  JobTwo:
+    runs-on: windows-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: print the date
+        env:
+          date: '`r format(Sys.time(), "%d %B, %Y")`'
+        run: echo $date
+        
+  JobThree:
+    runs-on: macos-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: print the date
+        env:
+          date: '`r format(Sys.time(), "%d %B, %Y")`'
+        run: echo $date  
+        
+  JobFour:
+    needs: [JobOne, JobTwo, JobThree]
+    runs-on: macos-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: print the date
+        env:
+          date: '`r format(Sys.time(), "%d %B, %Y")`'
+        run: echo $date 
